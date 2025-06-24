@@ -17,6 +17,7 @@
   runCommand,
   lima,
   jq,
+  config,
 }:
 
 buildGoModule (finalAttrs: {
@@ -158,6 +159,10 @@ buildGoModule (finalAttrs: {
 
     updateScript = nix-update-script { };
   };
+
+  pathsToLink = lib.mkIf stdenv.hostPlatform.isDarwin [
+      "/share/lima"
+  ];
 
   meta = {
     homepage = "https://github.com/lima-vm/lima";
